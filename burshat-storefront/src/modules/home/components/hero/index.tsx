@@ -43,23 +43,24 @@ import { Button, Heading } from "@medusajs/ui"
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { ArrowRight, ArrowLeft, ArrowDown } from "lucide-react"
+import Image from "next/image"
 // import { Button } from "@/components/ui/button"
 
 const carouselItems = [
   {
     title: "Welcome to BURSHAT",
     subtitle: "Discover Embroidered Clothing at unbeatable prices",
-    bgColor: "bg-gradient-to-r from-pink-300 to-purple-300",
+    imageSrc: "/1.webp", // Path to the image in the public folder
   },
   {
     title: "New Arrivals",
     subtitle: "Check out our latest collection",
-    bgColor: "bg-gradient-to-r from-blue-300 to-green-300",
+    imageSrc: "/4.webp", // Path to the image in the public folder
   },
   {
     title: "Summer Sale",
     subtitle: "Get up to 50% off on selected items",
-    bgColor: "bg-gradient-to-r from-yellow-300 to-red-300",
+    imageSrc: "/6.webp", // Path to the image in the public folder
   },
 ]
 
@@ -106,8 +107,17 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className={`absolute inset-0 ${item.bgColor}`}
-              />
+                className="absolute inset-0"
+                style={{ opacity: 0.5 }}
+              >
+                <Image
+                  src={item.imageSrc}
+                  alt={item.title}
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </motion.div>
             ),
         )}
       </AnimatePresence>
@@ -178,4 +188,3 @@ export default function Hero() {
     </motion.section>
   )
 }
-
